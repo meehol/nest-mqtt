@@ -8,6 +8,7 @@ export class PublishService {
     client.connect();
   }
 
+  // TODO Move state to Hazelcast/Redis
   private state = {
     // converting array of topics to an object for persisting the state of child topics
     childrenTopicsValues: configuration.childTopics.map(() => '1'),
