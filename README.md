@@ -34,4 +34,7 @@ $ pnpm test
 
 # test coverage
 $ pnpm test:cov
+
+# test e2e - Start mosquitto broker in the background at localhost:1883!
+$ pnpm test:e2e
 ```

@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { MqttController } from './mqtt.controller';
+import { AppController } from './app.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { OutboundResponseSerializer } from './outbound-response.serializer';
+import { OutboundResponseSerializer } from './utils/outbound-response.serializer';
+import { PublishService } from './publish.service';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { OutboundResponseSerializer } from './outbound-response.serializer';
       },
     ]),
   ],
-  controllers: [MqttController],
+  controllers: [AppController],
+  providers: [PublishService],
 })
 export class AppModule {}

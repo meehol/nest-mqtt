@@ -1,4 +1,4 @@
-import { OutboundResponseSerializer } from '../outbound-response.serializer';
+import { OutboundResponseSerializer } from '../utils/outbound-response.serializer';
 
 describe('OutboundResponseSerializer', () => {
   it('serializes the return message to contain payload only', () => {

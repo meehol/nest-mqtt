@@ -1,14 +1,9 @@
-import { Controller, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy, MqttContext } from '@nestjs/microservices';
 import configuration from './config/configuration';
-import {
-  ClientProxy,
-  Ctx,
-  MessagePattern,
-  MqttContext,
-} from '@nestjs/microservices';
 
-@Controller()
-export class MqttController {
+@Injectable()
+export class PublishService {
   constructor(@Inject('MQTT_SERVICE') protected client: ClientProxy) {
     client.connect();
   }
@@ -29,10 +24,7 @@ export class MqttController {
     await this.client.emit(configuration.parentTopic, value);
   }
 
-  @MessagePattern(
-    'site/123/photovoltaic/skidControlUnits/01A/inverters/+/status',
-  )
-  async subscribe(@Ctx() context: MqttContext) {
+  async handleMessage(context: MqttContext) {
     const payload = Buffer.from(context.getPacket().payload).toString();
     const topicName = context.getTopic();
     const indexOfCurrentTopicInState =
